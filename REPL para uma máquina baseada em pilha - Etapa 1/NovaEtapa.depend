@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1733876017 source:c:\users\bicta\desktop\novaetapa\main.c
+	<stdio.h>
+	"interpret.h"
+	"stack.h"
+
+1733353941 c:\users\bicta\desktop\novaetapa\interpret.h
+
+1733877109 source:c:\users\bicta\desktop\novaetapa\interpret.c
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	"interpret.h"
+	"stack.h"
+
+1733353860 c:\users\bicta\desktop\novaetapa\stack.h
+
+1733876951 source:c:\users\bicta\desktop\novaetapa\stack.c
+	<stdlib.h>
+	<stdio.h>
+	"stack.h"
+
