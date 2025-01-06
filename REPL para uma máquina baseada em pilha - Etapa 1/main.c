@@ -1,40 +1,24 @@
+#include "list.h"
 #include <stdio.h>
 
-#include "interpret.h"
+int main() {
+    List* l = list_create();
+    list_add(l, "key1", 10);
+    list_add(l, "key2", 20);
+    list_print(l);
 
-#include "stack.h"
+    int value = list_get(l, "key1");
+    printf("Value for key1: %d\n", value);
 
-static void repl()
-{
-  char line[1024];
-  for (;;)
-  {
-    printf("> ");
+    list_set(l, "key2", 30);
+    list_print(l);
 
-    if (!fgets(line, sizeof(line), stdin))
-    {
-      printf("\n");
-      break;
+    if (list_exist(l, "key3")) {
+        printf("key3 exists\n");
+    } else {
+        printf("key3 does not exist\n");
     }
 
-    interpret(line);
-  }
-}
-
-
-
-
-int main () {
-    init();
-    repl();
-    /* Stack* s = new_stack(10);
-    stack_push(s, 10);
-    stack_push(s, 20);
-    stack_push(s, 30);
-    stack_print(s);
-    stack_pop(s);
-    stack_pop(s);
-    stack_print(s); */
-
+    list_destroy(l);
     return 0;
 }

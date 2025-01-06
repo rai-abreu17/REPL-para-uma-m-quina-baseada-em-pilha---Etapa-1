@@ -4,11 +4,14 @@
 
 #include "interpret.h"
 #include "stack.h"
+#include "list.h"
 
 Stack *s;
+List *l;
 
 void init () {
     s = new_stack(10);
+    l = new_list();
 }
 
 void interpret (const char *source) {
@@ -16,11 +19,15 @@ void interpret (const char *source) {
     char arg[10];
 
     sscanf (source, "%s%s", op, arg);
-    // printf("operação: %s\n", op);
+    // printf("operaï¿½ï¿½o: %s\n", op);
     // printf("argumento: %s\n",  arg);
 
     if (strcmp(op, "push") == 0) {
-        stack_push(s, atoi(arg));
+       int value;
+       if (sscanf ( arg,"%d", &value) ==0){
+        value = list_get(l,arg);
+       }
+       stack_push(s, value);
     } else if (strcmp(op, "add") == 0) {
         int arg1 = stack_pop(s);
         int arg2 = stack_pop(s);
@@ -41,6 +48,13 @@ void interpret (const char *source) {
         int arg1 = stack_pop(s);
         printf("%d\n", arg1);
     }  else if (strcmp(op, "debug") == 0) {
-        stack_print(s);
+        int arg1 = stack_pop(s);
+        if ( list_exist(l,arg) ) {
+            list_set(l,arg,arg1);
+        }else{
+            list_append(l,arg,arg1);
+        }
+       
     }
+     //stack_print(s);
 }
