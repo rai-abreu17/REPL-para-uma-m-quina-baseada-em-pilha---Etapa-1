@@ -14,17 +14,19 @@ struct list {
     struct node* first;
 };
 
+// Função auxiliar para encontrar um nó pela chave
 static struct node* list_find(List* l, char* key) {
-    struct node* next = l->first;
-    while(next){
-        if(strcmp(next->key, key) == 0){
-            return next;
+    struct node* current = l->first;
+    while(current){
+        if(strcmp(current->key, key) == 0){
+            return current;
         }
-        next = next->next;
+        current = current->next;
     }
     return NULL;
 }
 
+// Cria uma nova lista
 List* list_create() {
     List* l = calloc(1, sizeof(List));
     if (!l) {
@@ -35,6 +37,7 @@ List* list_create() {
     return l;
 }
 
+// Adiciona um novo nó à lista
 void list_add(List* l, char* key, int value) {
     struct node* node = malloc(sizeof(struct node));
     if (!node) {
@@ -48,32 +51,37 @@ void list_add(List* l, char* key, int value) {
     l->first = node;
 }
 
+// Obtém o valor associado a uma chave
 int list_get(List* l, char* key) {
-    struct node* n;
-    if ((n = list_find(l, key)) != NULL) {
+    struct node* n = list_find(l, key);
+    if (n != NULL) {
         return n->value;
     }
     return -1;
 }
 
+// Define o valor para uma chave existente
 void list_set(List* l, char* key, int value) {
-    struct node* n;
-    if ((n = list_find(l, key)) != NULL) {
+    struct node* n = list_find(l, key);
+    if (n != NULL) {
         n->value = value;
     }
 }
 
+// Verifica se uma chave existe na lista
 int list_exist(List* l, char* key){
     return list_find(l, key) != NULL;
 }
 
+// Imprime todos os elementos da lista
 void list_print(List* l) {
-    struct node* next = l->first;
-    while(next){
-        printf("%s -> %d\n", next->key, next->value);
-        next = next->next;
+    struct node* current = l->first;
+    while(current){
+        printf("%s -> %d\n", current->key, current->value);
+        current = current->next;
     }
 }
+
 
 void list_destroy(List* l) {
     struct node* current = l->first;
@@ -84,4 +92,9 @@ void list_destroy(List* l) {
         current = next_node;
     }
     free(l);
+}
+
+
+void list_push(List* l, char* key, int value) {
+    list_add(l, key, value);
 }

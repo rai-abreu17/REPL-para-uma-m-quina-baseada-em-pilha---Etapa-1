@@ -1,10 +1,12 @@
 #include "list.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 int main() {
     List* l = list_create();
-    list_add(l, "key1", 10);
-    list_add(l, "key2", 20);
+    list_push(l, "key1", 10);
+    list_push(l, "key2", 20);
     list_print(l);
 
     int value = list_get(l, "key1");
